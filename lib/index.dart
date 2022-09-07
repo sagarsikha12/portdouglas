@@ -8,4 +8,3 @@ export 'logged_in_members/logged_in_members_widget.dart'
     show LoggedInMembersWidget;
 export 'becomea_member/becomea_member_widget.dart' show BecomeaMemberWidget;
 export 'whatsnew/whatsnew_widget.dart' show WhatsnewWidget;
-export 'about_us/about_us_widget.dart' show AboutUsWidget;

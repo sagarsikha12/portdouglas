@@ -1,4 +1,3 @@
-import '../about_us/about_us_widget.dart';
 import '../admin_login/admin_login_widget.dart';
 import '../backend/backend.dart';
 import '../becomea_member/becomea_member_widget.dart';
@@ -265,39 +264,6 @@ class _HomePageWidgetState extends State<HomePageWidget>
                   text: 'What\'s On ?',
                   icon: Icon(
                     Icons.fiber_new_outlined,
-                    size: 15,
-                  ),
-                  options: FFButtonOptions(
-                    width: 130,
-                    height: 40,
-                    color: FlutterFlowTheme.of(context).primaryColor,
-                    textStyle: FlutterFlowTheme.of(context).subtitle2.override(
-                          fontFamily:
-                              FlutterFlowTheme.of(context).subtitle2Family,
-                          color: FlutterFlowTheme.of(context).secondaryText,
-                        ),
-                    borderSide: BorderSide(
-                      color: Colors.transparent,
-                      width: 1,
-                    ),
-                    borderRadius: BorderRadius.circular(8),
-                  ),
-                ),
-                FFButtonWidget(
-                  onPressed: () async {
-                    await Navigator.push(
-                      context,
-                      PageTransition(
-                        type: PageTransitionType.fade,
-                        duration: Duration(milliseconds: 300),
-                        reverseDuration: Duration(milliseconds: 300),
-                        child: AboutUsWidget(),
-                      ),
-                    );
-                  },
-                  text: 'About Us',
-                  icon: Icon(
-                    Icons.info_outline,
                     size: 15,
                   ),
                   options: FFButtonOptions(
