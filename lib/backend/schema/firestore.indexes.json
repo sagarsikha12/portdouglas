@@ -1,0 +1,18 @@
+{
+  "indexes": [
+    {
+      "collectionGroup": "volunteer",
+      "queryScope": "COLLECTION",
+      "fields": [
+        {
+          "fieldPath": "is_Member",
+          "order": "ASCENDING"
+        },
+        {
+          "fieldPath": "date",
+          "order": "DESCENDING"
+        }
+      ]
+    }
+  ]
+}

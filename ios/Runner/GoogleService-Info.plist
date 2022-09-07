@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>CLIENT_ID</key>
+	<string>828979481475-92o0at5n1movm6do9ee85opgp650o7q7.apps.googleusercontent.com</string>
+	<key>REVERSED_CLIENT_ID</key>
+	<string>com.googleusercontent.apps.828979481475-92o0at5n1movm6do9ee85opgp650o7q7</string>
+	<key>API_KEY</key>
+	<string>AIzaSyByCCJAB8qY5XhC28Q7fz1Y1-_HU8d4pCY</string>
+	<key>GCM_SENDER_ID</key>
+	<string>828979481475</string>
+	<key>PLIST_VERSION</key>
+	<string>1</string>
+	<key>BUNDLE_ID</key>
+	<string>App.PortDouglasApp</string>
+	<key>PROJECT_ID</key>
+	<string>portdouglas-9e4f3</string>
+	<key>STORAGE_BUCKET</key>
+	<string>portdouglas-9e4f3.appspot.com</string>
+	<key>IS_ADS_ENABLED</key>
+	<false></false>
+	<key>IS_ANALYTICS_ENABLED</key>
+	<false></false>
+	<key>IS_APPINVITE_ENABLED</key>
+	<true></true>
+	<key>IS_GCM_ENABLED</key>
+	<true></true>
+	<key>IS_SIGNIN_ENABLED</key>
+	<true></true>
+	<key>GOOGLE_APP_ID</key>
+	<string>1:828979481475:ios:74130d8740ba45c1f804b6</string>
+	<key>DATABASE_URL</key>
+	<string>https://portdouglas-9e4f3-default-rtdb.firebaseio.com</string>
+</dict>
+</plist>

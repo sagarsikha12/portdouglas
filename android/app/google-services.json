@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "828979481475",
+    "firebase_url": "https://portdouglas-9e4f3-default-rtdb.firebaseio.com",
+    "project_id": "portdouglas-9e4f3",
+    "storage_bucket": "portdouglas-9e4f3.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:828979481475:android:ec3dcdbcda8aaefef804b6",
+        "android_client_info": {
+          "package_name": "App.PortDouglasApp"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "828979481475-9r9npe5leoac9sne7nspf9louvubsjpf.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCgfhqoDwVqe1PXl-OX1VHTXklG2TpDEIA"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "828979481475-9r9npe5leoac9sne7nspf9louvubsjpf.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "828979481475-92o0at5n1movm6do9ee85opgp650o7q7.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "App.PortDouglasApp"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
