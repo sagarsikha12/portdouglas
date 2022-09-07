@@ -605,83 +605,127 @@ class _LoggedInWidgetState extends State<LoggedInWidget>
                                           'stackOnActionTriggerAnimation']!
                                     ]),
                                   ),
-                                  FFButtonWidget(
-                                    onPressed: () async {
-                                      generatedDate =
-                                          await actions.getCurrentTimestamp();
+                                  Padding(
+                                    padding: EdgeInsetsDirectional.fromSTEB(
+                                        0, 0, 0, 10),
+                                    child: FFButtonWidget(
+                                      onPressed: () async {
+                                        generatedDate =
+                                            await actions.getCurrentTimestamp();
 
-                                      final postsCreateData =
-                                          createPostsRecordData(
-                                        title: newTitleController!.text,
-                                        description:
-                                            newDescriptionController!.text,
-                                        date: generatedDate,
-                                        image: uploadedFileUrl1,
-                                      );
-                                      await PostsRecord.collection
-                                          .doc()
-                                          .set(postsCreateData);
-                                      await showDialog(
-                                        context: context,
-                                        builder: (alertDialogContext) {
-                                          return AlertDialog(
-                                            title: Text('Success'),
-                                            content: Text(
-                                                'Post Updated Successfully'),
-                                            actions: [
-                                              TextButton(
-                                                onPressed: () => Navigator.pop(
-                                                    alertDialogContext),
-                                                child: Text('Ok'),
-                                              ),
-                                            ],
-                                          );
-                                        },
-                                      );
-                                      await Navigator.push(
-                                        context,
-                                        PageTransition(
-                                          type: PageTransitionType.scale,
-                                          alignment: Alignment.bottomCenter,
-                                          duration: Duration(milliseconds: 300),
-                                          reverseDuration:
-                                              Duration(milliseconds: 300),
-                                          child: LoggedInWidget(),
-                                        ),
-                                      );
-
-                                      setState(() {});
-                                    },
-                                    text: 'Add',
-                                    options: FFButtonOptions(
-                                      width: 130,
-                                      height: 40,
-                                      color: FlutterFlowTheme.of(context)
-                                          .primaryColor,
-                                      textStyle: FlutterFlowTheme.of(context)
-                                          .subtitle2
-                                          .override(
-                                            fontFamily:
-                                                FlutterFlowTheme.of(context)
-                                                    .subtitle2Family,
-                                            color: Colors.white,
+                                        final postsCreateData =
+                                            createPostsRecordData(
+                                          title: newTitleController!.text,
+                                          description:
+                                              newDescriptionController!.text,
+                                          date: generatedDate,
+                                          image: uploadedFileUrl1,
+                                        );
+                                        await PostsRecord.collection
+                                            .doc()
+                                            .set(postsCreateData);
+                                        await showDialog(
+                                          context: context,
+                                          builder: (alertDialogContext) {
+                                            return AlertDialog(
+                                              title: Text('Success'),
+                                              content: Text(
+                                                  'Post Updated Successfully'),
+                                              actions: [
+                                                TextButton(
+                                                  onPressed: () =>
+                                                      Navigator.pop(
+                                                          alertDialogContext),
+                                                  child: Text('Ok'),
+                                                ),
+                                              ],
+                                            );
+                                          },
+                                        );
+                                        await Navigator.push(
+                                          context,
+                                          PageTransition(
+                                            type: PageTransitionType.scale,
+                                            alignment: Alignment.bottomCenter,
+                                            duration:
+                                                Duration(milliseconds: 300),
+                                            reverseDuration:
+                                                Duration(milliseconds: 300),
+                                            child: LoggedInWidget(),
                                           ),
-                                      borderSide: BorderSide(
-                                        color: Colors.transparent,
-                                        width: 1,
+                                        );
+
+                                        setState(() {});
+                                      },
+                                      text: 'Add',
+                                      options: FFButtonOptions(
+                                        width: 130,
+                                        height: 40,
+                                        color: FlutterFlowTheme.of(context)
+                                            .primaryColor,
+                                        textStyle: FlutterFlowTheme.of(context)
+                                            .subtitle2
+                                            .override(
+                                              fontFamily:
+                                                  FlutterFlowTheme.of(context)
+                                                      .subtitle2Family,
+                                              color: Colors.white,
+                                            ),
+                                        borderSide: BorderSide(
+                                          color: Colors.transparent,
+                                          width: 1,
+                                        ),
+                                        borderRadius: BorderRadius.circular(8),
                                       ),
-                                      borderRadius: BorderRadius.circular(8),
-                                    ),
-                                  ).animated([
-                                    animationsMap[
-                                        'buttonOnActionTriggerAnimation1']!
-                                  ]),
+                                    ).animated([
+                                      animationsMap[
+                                          'buttonOnActionTriggerAnimation1']!
+                                    ]),
+                                  ),
                                 ],
+                              ),
+                            ),
+                            Padding(
+                              padding:
+                                  EdgeInsetsDirectional.fromSTEB(0, 0, 0, 10),
+                              child: FFButtonWidget(
+                                onPressed: () async {
+                                  await Navigator.push(
+                                    context,
+                                    PageTransition(
+                                      type: PageTransitionType.scale,
+                                      alignment: Alignment.bottomCenter,
+                                      duration: Duration(milliseconds: 300),
+                                      reverseDuration:
+                                          Duration(milliseconds: 300),
+                                      child: LoggedInMembersWidget(),
+                                    ),
+                                  );
+                                },
+                                text: 'Check Members',
+                                options: FFButtonOptions(
+                                  height: 40,
+                                  color:
+                                      FlutterFlowTheme.of(context).primaryText,
+                                  textStyle: FlutterFlowTheme.of(context)
+                                      .subtitle2
+                                      .override(
+                                        fontFamily: FlutterFlowTheme.of(context)
+                                            .subtitle2Family,
+                                        color: Colors.white,
+                                      ),
+                                  borderSide: BorderSide(
+                                    color: Colors.transparent,
+                                    width: 1,
+                                  ),
+                                  borderRadius: BorderRadius.circular(8),
+                                ),
                               ),
                             ),
                             FFButtonWidget(
                               onPressed: () async {
-                                await Navigator.push(
+                                await signOut();
+                                await Navigator.pushAndRemoveUntil(
                                   context,
                                   PageTransition(
                                     type: PageTransitionType.scale,
@@ -689,15 +733,15 @@ class _LoggedInWidgetState extends State<LoggedInWidget>
                                     duration: Duration(milliseconds: 300),
                                     reverseDuration:
                                         Duration(milliseconds: 300),
-                                    child: LoggedInMembersWidget(),
+                                    child: HomePageWidget(),
                                   ),
+                                  (r) => false,
                                 );
                               },
-                              text: 'Check Members',
+                              text: 'Logout ',
                               options: FFButtonOptions(
                                 height: 40,
-                                color:
-                                    FlutterFlowTheme.of(context).primaryColor,
+                                color: Color(0xFFE40004),
                                 textStyle: FlutterFlowTheme.of(context)
                                     .subtitle2
                                     .override(
