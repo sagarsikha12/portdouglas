@@ -16,14 +16,12 @@ import '../update_post/update_post_widget.dart';
 import '../whatsnew/whatsnew_widget.dart';
 import '../custom_code/actions/index.dart' as actions;
 import '../flutter_flow/custom_functions.dart' as functions;
-import 'package:cached_network_image/cached_network_image.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:easy_debounce/easy_debounce.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
 import 'package:flutter_slidable/flutter_slidable.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:simple_gradient_text/simple_gradient_text.dart';
 
 class LoggedInWidget extends StatefulWidget {
   const LoggedInWidget({Key? key}) : super(key: key);
@@ -810,201 +808,350 @@ class _LoggedInWidgetState extends State<LoggedInWidget>
                                     child: Column(
                                       mainAxisSize: MainAxisSize.max,
                                       children: [
-                                        GradientText(
-                                          'Add Two Images turn by turn  to display on What\'s On Page',
-                                          textAlign: TextAlign.center,
-                                          style: FlutterFlowTheme.of(context)
-                                              .bodyText1
-                                              .override(
-                                                fontFamily: 'Lato',
-                                                fontSize: 15,
-                                                fontStyle: FontStyle.italic,
-                                              ),
-                                          colors: [
-                                            FlutterFlowTheme.of(context)
-                                                .primaryColor,
-                                            Color(0xFFBB3FE9)
-                                          ],
-                                          gradientDirection:
-                                              GradientDirection.ltr,
-                                          gradientType: GradientType.linear,
-                                        ),
-                                        Stack(
-                                          children: [
-                                            if (functions.hasUploadedMedia(
-                                                uploadedFileUrl2))
-                                              CachedNetworkImage(
-                                                imageUrl: uploadedFileUrl2,
-                                                width: 100,
-                                                height: 100,
-                                                fit: BoxFit.cover,
-                                              ),
-                                            if (!functions.hasUploadedMedia(
-                                                uploadedFileUrl2))
-                                              Row(
-                                                mainAxisSize: MainAxisSize.max,
-                                                mainAxisAlignment:
-                                                    MainAxisAlignment.center,
-                                                children: [
-                                                  InkWell(
-                                                    onTap: () async {
-                                                      final selectedMedia =
-                                                          await selectMediaWithSourceBottomSheet(
-                                                        context: context,
-                                                        allowPhoto: true,
-                                                        textColor:
-                                                            Color(0xFF283593),
-                                                        pickerFontFamily:
-                                                            'Open Sans',
-                                                      );
-                                                      if (selectedMedia !=
-                                                              null &&
-                                                          selectedMedia.every((m) =>
-                                                              validateFileFormat(
-                                                                  m.storagePath,
-                                                                  context))) {
-                                                        showUploadMessage(
-                                                          context,
-                                                          'Uploading file...',
-                                                          showLoading: true,
-                                                        );
-                                                        final downloadUrls = (await Future.wait(
-                                                                selectedMedia.map((m) async =>
-                                                                    await uploadData(
-                                                                        m.storagePath,
-                                                                        m.bytes))))
-                                                            .where((u) => u != null)
-                                                            .map((u) => u!)
-                                                            .toList();
-                                                        ScaffoldMessenger.of(
-                                                                context)
-                                                            .hideCurrentSnackBar();
-                                                        if (downloadUrls
-                                                                .length ==
-                                                            selectedMedia
-                                                                .length) {
-                                                          setState(() =>
-                                                              uploadedFileUrl2 =
-                                                                  downloadUrls
-                                                                      .first);
-                                                          showUploadMessage(
-                                                            context,
-                                                            'Success!',
-                                                          );
-                                                        } else {
-                                                          showUploadMessage(
-                                                            context,
-                                                            'Failed to upload media',
-                                                          );
-                                                          return;
-                                                        }
-                                                      }
-                                                    },
-                                                    child: Text(
-                                                      'Upload Image',
-                                                      style:
-                                                          FlutterFlowTheme.of(
-                                                                  context)
-                                                              .bodyText1,
-                                                    ),
-                                                  ),
-                                                  FlutterFlowIconButton(
-                                                    borderColor:
-                                                        Colors.transparent,
-                                                    borderRadius: 30,
-                                                    borderWidth: 1,
-                                                    buttonSize: 60,
-                                                    icon: Icon(
-                                                      Icons.file_upload,
-                                                      color:
-                                                          FlutterFlowTheme.of(
-                                                                  context)
-                                                              .primaryText,
-                                                      size: 30,
-                                                    ),
-                                                    onPressed: () {
-                                                      print(
-                                                          'IconButton pressed ...');
-                                                    },
-                                                  ),
-                                                ],
-                                              ),
-                                          ],
-                                        ),
-                                        FFButtonWidget(
-                                          onPressed: () async {
-                                            generatedDate1 = await actions
-                                                .getCurrentTimestamp();
-
-                                            final whatsonCreateData =
-                                                createWhatsonRecordData(
-                                              image: uploadedFileUrl2,
-                                              date: getCurrentTimestamp,
-                                            );
-                                            await WhatsonRecord.collection
-                                                .doc()
-                                                .set(whatsonCreateData);
-                                            await showDialog(
-                                              context: context,
-                                              builder: (alertDialogContext) {
-                                                return AlertDialog(
-                                                  title: Text('✅'),
-                                                  content: Text(
-                                                      'What\'s on updated Successfully'),
-                                                  actions: [
-                                                    TextButton(
-                                                      onPressed: () =>
-                                                          Navigator.pop(
-                                                              alertDialogContext),
-                                                      child: Text('Ok'),
-                                                    ),
-                                                  ],
-                                                );
-                                              },
-                                            );
-                                            await Navigator.push(
-                                              context,
-                                              PageTransition(
-                                                type: PageTransitionType.scale,
-                                                alignment:
-                                                    Alignment.bottomCenter,
-                                                duration:
-                                                    Duration(milliseconds: 300),
-                                                reverseDuration:
-                                                    Duration(milliseconds: 300),
-                                                child: LoggedInWidget(),
-                                              ),
-                                            );
-
-                                            setState(() {});
-                                          },
-                                          text: 'Add Image',
-                                          options: FFButtonOptions(
-                                            width: 130,
-                                            height: 40,
-                                            color: FlutterFlowTheme.of(context)
-                                                .primaryColor,
-                                            textStyle:
-                                                FlutterFlowTheme.of(context)
-                                                    .subtitle2
-                                                    .override(
-                                                      fontFamily:
-                                                          FlutterFlowTheme.of(
-                                                                  context)
-                                                              .subtitle2Family,
-                                                      color: Colors.white,
-                                                    ),
-                                            borderSide: BorderSide(
-                                              color: Colors.transparent,
-                                              width: 1,
+                                        Container(
+                                          width:
+                                              MediaQuery.of(context).size.width,
+                                          height: 350,
+                                          decoration: BoxDecoration(
+                                            color: Colors.white,
+                                            borderRadius: BorderRadius.only(
+                                              bottomLeft: Radius.circular(0),
+                                              bottomRight: Radius.circular(0),
+                                              topLeft: Radius.circular(16),
+                                              topRight: Radius.circular(16),
                                             ),
-                                            borderRadius:
-                                                BorderRadius.circular(8),
                                           ),
-                                        ).animated([
-                                          animationsMap[
-                                              'buttonOnActionTriggerAnimation']!
-                                        ]),
+                                          child: Padding(
+                                            padding:
+                                                EdgeInsetsDirectional.fromSTEB(
+                                                    4, 4, 4, 4),
+                                            child: Column(
+                                              mainAxisSize: MainAxisSize.max,
+                                              children: [
+                                                Expanded(
+                                                  child: Padding(
+                                                    padding:
+                                                        EdgeInsetsDirectional
+                                                            .fromSTEB(
+                                                                20, 8, 20, 0),
+                                                    child:
+                                                        SingleChildScrollView(
+                                                      child: Column(
+                                                        mainAxisSize:
+                                                            MainAxisSize.max,
+                                                        mainAxisAlignment:
+                                                            MainAxisAlignment
+                                                                .start,
+                                                        crossAxisAlignment:
+                                                            CrossAxisAlignment
+                                                                .start,
+                                                        children: [
+                                                          Divider(
+                                                            thickness: 3,
+                                                            indent: 150,
+                                                            endIndent: 150,
+                                                            color: Color(
+                                                                0xFFF1F4F8),
+                                                          ),
+                                                          Row(
+                                                            mainAxisSize:
+                                                                MainAxisSize
+                                                                    .max,
+                                                            mainAxisAlignment:
+                                                                MainAxisAlignment
+                                                                    .spaceBetween,
+                                                            children: [
+                                                              Expanded(
+                                                                child: Padding(
+                                                                  padding: EdgeInsetsDirectional
+                                                                      .fromSTEB(
+                                                                          0,
+                                                                          4,
+                                                                          16,
+                                                                          0),
+                                                                  child: Text(
+                                                                    'Add Photos here..',
+                                                                    style: FlutterFlowTheme.of(
+                                                                            context)
+                                                                        .title2
+                                                                        .override(
+                                                                          fontFamily:
+                                                                              'Outfit',
+                                                                          color:
+                                                                              Color(0xFF14181B),
+                                                                          fontSize:
+                                                                              28,
+                                                                          fontWeight:
+                                                                              FontWeight.normal,
+                                                                        ),
+                                                                  ),
+                                                                ),
+                                                              ),
+                                                            ],
+                                                          ),
+                                                          Row(
+                                                            mainAxisSize:
+                                                                MainAxisSize
+                                                                    .max,
+                                                            children: [
+                                                              Expanded(
+                                                                child: Padding(
+                                                                  padding: EdgeInsetsDirectional
+                                                                      .fromSTEB(
+                                                                          0,
+                                                                          8,
+                                                                          0,
+                                                                          0),
+                                                                  child: Text(
+                                                                    'First upload one photo and upload second photo. First picture will be displayed in 2nd number.',
+                                                                    style: FlutterFlowTheme.of(
+                                                                            context)
+                                                                        .bodyText2
+                                                                        .override(
+                                                                          fontFamily:
+                                                                              'Outfit',
+                                                                          color:
+                                                                              Color(0xFF57636C),
+                                                                          fontSize:
+                                                                              14,
+                                                                          fontWeight:
+                                                                              FontWeight.normal,
+                                                                        ),
+                                                                  ),
+                                                                ),
+                                                              ),
+                                                              Container(
+                                                                width: 100,
+                                                                height: 100,
+                                                                decoration:
+                                                                    BoxDecoration(
+                                                                  color: FlutterFlowTheme.of(
+                                                                          context)
+                                                                      .secondaryBackground,
+                                                                ),
+                                                              ),
+                                                            ],
+                                                          ),
+                                                        ],
+                                                      ),
+                                                    ),
+                                                  ),
+                                                ),
+                                                if (functions.hasUploadedMedia(
+                                                    uploadedFileUrl2))
+                                                  Container(
+                                                    width: 100,
+                                                    height: 100,
+                                                    decoration: BoxDecoration(
+                                                      color: FlutterFlowTheme
+                                                              .of(context)
+                                                          .secondaryBackground,
+                                                    ),
+                                                    child: Image.network(
+                                                      uploadedFileUrl2,
+                                                      width: 100,
+                                                      height: 100,
+                                                      fit: BoxFit.cover,
+                                                    ),
+                                                  ),
+                                                Padding(
+                                                  padding: EdgeInsetsDirectional
+                                                      .fromSTEB(0, 24, 0, 44),
+                                                  child: Row(
+                                                    mainAxisSize:
+                                                        MainAxisSize.max,
+                                                    mainAxisAlignment:
+                                                        MainAxisAlignment
+                                                            .spaceAround,
+                                                    children: [
+                                                      FFButtonWidget(
+                                                        onPressed: () async {
+                                                          final selectedMedia =
+                                                              await selectMediaWithSourceBottomSheet(
+                                                            context: context,
+                                                            allowPhoto: true,
+                                                          );
+                                                          if (selectedMedia !=
+                                                                  null &&
+                                                              selectedMedia.every((m) =>
+                                                                  validateFileFormat(
+                                                                      m.storagePath,
+                                                                      context))) {
+                                                            showUploadMessage(
+                                                              context,
+                                                              'Uploading file...',
+                                                              showLoading: true,
+                                                            );
+                                                            final downloadUrls =
+                                                                (await Future.wait(selectedMedia.map((m) async =>
+                                                                        await uploadData(
+                                                                            m
+                                                                                .storagePath,
+                                                                            m
+                                                                                .bytes))))
+                                                                    .where(
+                                                                        (u) =>
+                                                                            u !=
+                                                                            null)
+                                                                    .map((u) =>
+                                                                        u!)
+                                                                    .toList();
+                                                            ScaffoldMessenger
+                                                                    .of(context)
+                                                                .hideCurrentSnackBar();
+                                                            if (downloadUrls
+                                                                    .length ==
+                                                                selectedMedia
+                                                                    .length) {
+                                                              setState(() =>
+                                                                  uploadedFileUrl2 =
+                                                                      downloadUrls
+                                                                          .first);
+                                                              showUploadMessage(
+                                                                context,
+                                                                'Success!',
+                                                              );
+                                                            } else {
+                                                              showUploadMessage(
+                                                                context,
+                                                                'Failed to upload media',
+                                                              );
+                                                              return;
+                                                            }
+                                                          }
+                                                        },
+                                                        text: 'Upload Image',
+                                                        options:
+                                                            FFButtonOptions(
+                                                          width: 150,
+                                                          height: 50,
+                                                          color:
+                                                              Color(0xFFDBE2E7),
+                                                          textStyle:
+                                                              FlutterFlowTheme.of(
+                                                                      context)
+                                                                  .subtitle2
+                                                                  .override(
+                                                                    fontFamily:
+                                                                        'Outfit',
+                                                                    color: Color(
+                                                                        0xFF14181B),
+                                                                    fontSize:
+                                                                        16,
+                                                                    fontWeight:
+                                                                        FontWeight
+                                                                            .w500,
+                                                                  ),
+                                                          elevation: 2,
+                                                          borderSide:
+                                                              BorderSide(
+                                                            color: Colors
+                                                                .transparent,
+                                                            width: 1,
+                                                          ),
+                                                        ),
+                                                      ),
+                                                      FFButtonWidget(
+                                                        onPressed: () async {
+                                                          generatedDate1 =
+                                                              await actions
+                                                                  .getCurrentTimestamp();
+
+                                                          final whatsonCreateData =
+                                                              createWhatsonRecordData(
+                                                            image:
+                                                                uploadedFileUrl2,
+                                                            date:
+                                                                getCurrentTimestamp,
+                                                          );
+                                                          await WhatsonRecord
+                                                              .collection
+                                                              .doc()
+                                                              .set(
+                                                                  whatsonCreateData);
+                                                          await showDialog(
+                                                            context: context,
+                                                            builder:
+                                                                (alertDialogContext) {
+                                                              return AlertDialog(
+                                                                title:
+                                                                    Text('✅'),
+                                                                content: Text(
+                                                                    'What\'s on updated Successfully'),
+                                                                actions: [
+                                                                  TextButton(
+                                                                    onPressed: () =>
+                                                                        Navigator.pop(
+                                                                            alertDialogContext),
+                                                                    child: Text(
+                                                                        'Ok'),
+                                                                  ),
+                                                                ],
+                                                              );
+                                                            },
+                                                          );
+                                                          await Navigator.push(
+                                                            context,
+                                                            PageTransition(
+                                                              type:
+                                                                  PageTransitionType
+                                                                      .scale,
+                                                              alignment: Alignment
+                                                                  .bottomCenter,
+                                                              duration: Duration(
+                                                                  milliseconds:
+                                                                      300),
+                                                              reverseDuration:
+                                                                  Duration(
+                                                                      milliseconds:
+                                                                          300),
+                                                              child:
+                                                                  LoggedInWidget(),
+                                                            ),
+                                                          );
+
+                                                          setState(() {});
+                                                        },
+                                                        text: 'Add  Image',
+                                                        options:
+                                                            FFButtonOptions(
+                                                          width: 130,
+                                                          height: 40,
+                                                          color: FlutterFlowTheme
+                                                                  .of(context)
+                                                              .primaryColor,
+                                                          textStyle:
+                                                              FlutterFlowTheme.of(
+                                                                      context)
+                                                                  .subtitle2
+                                                                  .override(
+                                                                    fontFamily:
+                                                                        FlutterFlowTheme.of(context)
+                                                                            .subtitle2Family,
+                                                                    color: Colors
+                                                                        .white,
+                                                                  ),
+                                                          borderSide:
+                                                              BorderSide(
+                                                            color: Colors
+                                                                .transparent,
+                                                            width: 1,
+                                                          ),
+                                                          borderRadius:
+                                                              BorderRadius
+                                                                  .circular(8),
+                                                        ),
+                                                      ).animated([
+                                                        animationsMap[
+                                                            'buttonOnActionTriggerAnimation']!
+                                                      ]),
+                                                    ],
+                                                  ),
+                                                ),
+                                              ],
+                                            ),
+                                          ),
+                                        ),
                                       ],
                                     ),
                                   );
