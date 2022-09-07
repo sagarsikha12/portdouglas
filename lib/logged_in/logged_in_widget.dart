@@ -36,59 +36,14 @@ class _LoggedInWidgetState extends State<LoggedInWidget>
     with TickerProviderStateMixin {
   DateTime? generatedDate1;
   String uploadedFileUrl2 = '';
-  DateTime? generatedDate;
+  PostsRecord? posted;
   String uploadedFileUrl1 = '';
-  TextEditingController? newDescriptionController;
-  TextEditingController? newTitleController;
+  TextEditingController? descriptionController;
+  TextEditingController? titleController;
   final formKey = GlobalKey<FormState>();
   final scaffoldKey = GlobalKey<ScaffoldState>();
   final animationsMap = {
-    'textFieldOnActionTriggerAnimation': AnimationInfo(
-      trigger: AnimationTrigger.onActionTrigger,
-      duration: 600,
-      hideBeforeAnimating: false,
-      initialState: AnimationState(
-        offset: Offset(0, 0),
-        scale: 1,
-        opacity: 0,
-      ),
-      finalState: AnimationState(
-        offset: Offset(0, 0),
-        scale: 1,
-        opacity: 1,
-      ),
-    ),
-    'stackOnActionTriggerAnimation': AnimationInfo(
-      trigger: AnimationTrigger.onActionTrigger,
-      duration: 600,
-      hideBeforeAnimating: false,
-      initialState: AnimationState(
-        offset: Offset(0, 0),
-        scale: 1,
-        opacity: 0,
-      ),
-      finalState: AnimationState(
-        offset: Offset(0, 0),
-        scale: 1,
-        opacity: 1,
-      ),
-    ),
-    'buttonOnActionTriggerAnimation1': AnimationInfo(
-      trigger: AnimationTrigger.onActionTrigger,
-      duration: 600,
-      hideBeforeAnimating: false,
-      initialState: AnimationState(
-        offset: Offset(0, 0),
-        scale: 1,
-        opacity: 0,
-      ),
-      finalState: AnimationState(
-        offset: Offset(0, 0),
-        scale: 1,
-        opacity: 1,
-      ),
-    ),
-    'buttonOnActionTriggerAnimation2': AnimationInfo(
+    'buttonOnActionTriggerAnimation': AnimationInfo(
       trigger: AnimationTrigger.onActionTrigger,
       duration: 600,
       hideBeforeAnimating: false,
@@ -126,8 +81,8 @@ class _LoggedInWidgetState extends State<LoggedInWidget>
       }
     });
 
-    newDescriptionController = TextEditingController();
-    newTitleController = TextEditingController();
+    descriptionController = TextEditingController();
+    titleController = TextEditingController();
     setupTriggerAnimations(
       animationsMap.values
           .where((anim) => anim.trigger == AnimationTrigger.onActionTrigger),
@@ -358,331 +313,389 @@ class _LoggedInWidgetState extends State<LoggedInWidget>
                             Form(
                               key: formKey,
                               autovalidateMode: AutovalidateMode.disabled,
-                              child: Column(
-                                mainAxisSize: MainAxisSize.max,
-                                children: [
-                                  Text(
-                                    'New Title:',
-                                    style: FlutterFlowTheme.of(context)
-                                        .bodyText1
-                                        .override(
-                                          fontFamily:
-                                              FlutterFlowTheme.of(context)
-                                                  .bodyText1Family,
-                                          fontSize: 20,
-                                          fontWeight: FontWeight.bold,
-                                        ),
+                              child: Padding(
+                                padding: EdgeInsetsDirectional.fromSTEB(
+                                    16, 12, 16, 0),
+                                child: Container(
+                                  width: double.infinity,
+                                  decoration: BoxDecoration(
+                                    color: Colors.white,
+                                    boxShadow: [
+                                      BoxShadow(
+                                        blurRadius: 5,
+                                        color: Color(0x162D3A21),
+                                        offset: Offset(0, 3),
+                                      )
+                                    ],
+                                    borderRadius: BorderRadius.circular(12),
                                   ),
-                                  TextFormField(
-                                    controller: newTitleController,
-                                    onChanged: (_) => EasyDebounce.debounce(
-                                      'newTitleController',
-                                      Duration(milliseconds: 2000),
-                                      () => setState(() {}),
-                                    ),
-                                    autofocus: true,
-                                    obscureText: false,
-                                    decoration: InputDecoration(
-                                      hintText: 'Type title here...',
-                                      hintStyle: FlutterFlowTheme.of(context)
-                                          .bodyText2
-                                          .override(
-                                            fontFamily:
-                                                FlutterFlowTheme.of(context)
-                                                    .bodyText2Family,
-                                            color: FlutterFlowTheme.of(context)
-                                                .primaryText,
-                                          ),
-                                      enabledBorder: UnderlineInputBorder(
-                                        borderSide: BorderSide(
-                                          color: Color(0x00000000),
-                                          width: 1,
-                                        ),
-                                        borderRadius: const BorderRadius.only(
-                                          topLeft: Radius.circular(4.0),
-                                          topRight: Radius.circular(4.0),
-                                        ),
-                                      ),
-                                      focusedBorder: UnderlineInputBorder(
-                                        borderSide: BorderSide(
-                                          color: Color(0x00000000),
-                                          width: 1,
-                                        ),
-                                        borderRadius: const BorderRadius.only(
-                                          topLeft: Radius.circular(4.0),
-                                          topRight: Radius.circular(4.0),
-                                        ),
-                                      ),
-                                      suffixIcon:
-                                          newTitleController!.text.isNotEmpty
-                                              ? InkWell(
-                                                  onTap: () async {
-                                                    newTitleController?.clear();
-                                                    setState(() {});
-                                                  },
-                                                  child: Icon(
-                                                    Icons.clear,
-                                                    color: Color(0xFF757575),
-                                                    size: 22,
+                                  child: Column(
+                                    mainAxisSize: MainAxisSize.max,
+                                    children: [
+                                      Container(
+                                        height: 200,
+                                        child: Column(
+                                          mainAxisSize: MainAxisSize.max,
+                                          children: [
+                                            Padding(
+                                              padding: EdgeInsetsDirectional
+                                                  .fromSTEB(12, 12, 12, 8),
+                                              child: Row(
+                                                mainAxisSize: MainAxisSize.max,
+                                                crossAxisAlignment:
+                                                    CrossAxisAlignment.start,
+                                                children: [
+                                                  Expanded(
+                                                    child: Padding(
+                                                      padding:
+                                                          EdgeInsetsDirectional
+                                                              .fromSTEB(
+                                                                  8, 0, 0, 0),
+                                                      child: TextFormField(
+                                                        controller:
+                                                            titleController,
+                                                        onChanged: (_) =>
+                                                            EasyDebounce
+                                                                .debounce(
+                                                          'titleController',
+                                                          Duration(
+                                                              milliseconds:
+                                                                  2000),
+                                                          () => setState(() {}),
+                                                        ),
+                                                        autofocus: true,
+                                                        obscureText: false,
+                                                        decoration:
+                                                            InputDecoration(
+                                                          hintText:
+                                                              'Title here',
+                                                          hintStyle:
+                                                              FlutterFlowTheme.of(
+                                                                      context)
+                                                                  .title2
+                                                                  .override(
+                                                                    fontFamily:
+                                                                        FlutterFlowTheme.of(context)
+                                                                            .title2Family,
+                                                                    color: Color(
+                                                                        0xFFB17070),
+                                                                  ),
+                                                          enabledBorder:
+                                                              UnderlineInputBorder(
+                                                            borderSide:
+                                                                BorderSide(
+                                                              color: Color(
+                                                                  0x00000000),
+                                                              width: 1,
+                                                            ),
+                                                            borderRadius:
+                                                                const BorderRadius
+                                                                    .only(
+                                                              topLeft: Radius
+                                                                  .circular(
+                                                                      4.0),
+                                                              topRight: Radius
+                                                                  .circular(
+                                                                      4.0),
+                                                            ),
+                                                          ),
+                                                          focusedBorder:
+                                                              UnderlineInputBorder(
+                                                            borderSide:
+                                                                BorderSide(
+                                                              color: Color(
+                                                                  0x00000000),
+                                                              width: 1,
+                                                            ),
+                                                            borderRadius:
+                                                                const BorderRadius
+                                                                    .only(
+                                                              topLeft: Radius
+                                                                  .circular(
+                                                                      4.0),
+                                                              topRight: Radius
+                                                                  .circular(
+                                                                      4.0),
+                                                            ),
+                                                          ),
+                                                          contentPadding:
+                                                              EdgeInsetsDirectional
+                                                                  .fromSTEB(16,
+                                                                      0, 8, 12),
+                                                        ),
+                                                        style:
+                                                            FlutterFlowTheme.of(
+                                                                    context)
+                                                                .title2
+                                                                .override(
+                                                                  fontFamily: FlutterFlowTheme.of(
+                                                                          context)
+                                                                      .title2Family,
+                                                                  color: FlutterFlowTheme.of(
+                                                                          context)
+                                                                      .primaryText,
+                                                                ),
+                                                        maxLines: 2,
+                                                      ),
+                                                    ),
                                                   ),
-                                                )
-                                              : null,
-                                    ),
-                                    style: FlutterFlowTheme.of(context)
-                                        .subtitle2
-                                        .override(
-                                          fontFamily: 'Open Sans',
-                                          color: FlutterFlowTheme.of(context)
-                                              .primaryText,
-                                        ),
-                                    textAlign: TextAlign.center,
-                                  ).animated([
-                                    animationsMap[
-                                        'textFieldOnActionTriggerAnimation']!
-                                  ]),
-                                  Text(
-                                    'Description:',
-                                    style: FlutterFlowTheme.of(context)
-                                        .bodyText1
-                                        .override(
-                                          fontFamily:
-                                              FlutterFlowTheme.of(context)
-                                                  .bodyText1Family,
-                                          fontSize: 20,
-                                          fontWeight: FontWeight.bold,
-                                        ),
-                                  ),
-                                  TextFormField(
-                                    controller: newDescriptionController,
-                                    autofocus: true,
-                                    obscureText: false,
-                                    decoration: InputDecoration(
-                                      hintText: 'Type Description here',
-                                      hintStyle: FlutterFlowTheme.of(context)
-                                          .bodyText2
-                                          .override(
-                                            fontFamily:
-                                                FlutterFlowTheme.of(context)
-                                                    .bodyText2Family,
-                                            color: FlutterFlowTheme.of(context)
-                                                .primaryText,
-                                          ),
-                                      enabledBorder: UnderlineInputBorder(
-                                        borderSide: BorderSide(
-                                          color: Color(0x00000000),
-                                          width: 1,
-                                        ),
-                                        borderRadius: const BorderRadius.only(
-                                          topLeft: Radius.circular(4.0),
-                                          topRight: Radius.circular(4.0),
-                                        ),
-                                      ),
-                                      focusedBorder: UnderlineInputBorder(
-                                        borderSide: BorderSide(
-                                          color: Color(0x00000000),
-                                          width: 1,
-                                        ),
-                                        borderRadius: const BorderRadius.only(
-                                          topLeft: Radius.circular(4.0),
-                                          topRight: Radius.circular(4.0),
-                                        ),
-                                      ),
-                                    ),
-                                    style: FlutterFlowTheme.of(context)
-                                        .bodyText1
-                                        .override(
-                                          fontFamily:
-                                              FlutterFlowTheme.of(context)
-                                                  .bodyText1Family,
-                                          fontWeight: FontWeight.w600,
-                                        ),
-                                    textAlign: TextAlign.center,
-                                  ),
-                                  Container(
-                                    width: MediaQuery.of(context).size.width,
-                                    decoration: BoxDecoration(
-                                      color: Color(0x81FFFFFF),
-                                    ),
-                                    child: Stack(
-                                      children: [
-                                        if (functions
-                                            .hasUploadedMedia(uploadedFileUrl1))
-                                          Image.network(
-                                            uploadedFileUrl1,
-                                            width: 100,
-                                            height: 100,
-                                            fit: BoxFit.cover,
-                                          ),
-                                        if (!functions
-                                            .hasUploadedMedia(uploadedFileUrl1))
-                                          Row(
-                                            mainAxisSize: MainAxisSize.max,
-                                            mainAxisAlignment:
-                                                MainAxisAlignment.center,
-                                            children: [
-                                              InkWell(
-                                                onTap: () async {
-                                                  final selectedMedia =
-                                                      await selectMediaWithSourceBottomSheet(
-                                                    context: context,
-                                                    imageQuality: 100,
-                                                    allowPhoto: true,
-                                                    textColor:
-                                                        Color(0xFF283593),
-                                                    pickerFontFamily:
-                                                        'Open Sans',
-                                                  );
-                                                  if (selectedMedia != null &&
-                                                      selectedMedia.every((m) =>
-                                                          validateFileFormat(
-                                                              m.storagePath,
-                                                              context))) {
-                                                    showUploadMessage(
-                                                      context,
-                                                      'Uploading file...',
-                                                      showLoading: true,
-                                                    );
-                                                    final downloadUrls = (await Future
-                                                            .wait(selectedMedia
-                                                                .map((m) async =>
-                                                                    await uploadData(
-                                                                        m.storagePath,
-                                                                        m.bytes))))
-                                                        .where((u) => u != null)
-                                                        .map((u) => u!)
-                                                        .toList();
-                                                    ScaffoldMessenger.of(
-                                                            context)
-                                                        .hideCurrentSnackBar();
-                                                    if (downloadUrls.length ==
-                                                        selectedMedia.length) {
-                                                      setState(() =>
-                                                          uploadedFileUrl1 =
-                                                              downloadUrls
-                                                                  .first);
-                                                      showUploadMessage(
-                                                        context,
-                                                        'Success!',
-                                                      );
-                                                    } else {
-                                                      showUploadMessage(
-                                                        context,
-                                                        'Failed to upload media',
-                                                      );
-                                                      return;
-                                                    }
-                                                  }
-                                                },
-                                                child: Text(
-                                                  'Upload Image',
+                                                ],
+                                              ),
+                                            ),
+                                            Expanded(
+                                              child: Padding(
+                                                padding: EdgeInsetsDirectional
+                                                    .fromSTEB(8, 0, 0, 0),
+                                                child: TextFormField(
+                                                  controller:
+                                                      descriptionController,
+                                                  onChanged: (_) =>
+                                                      EasyDebounce.debounce(
+                                                    'descriptionController',
+                                                    Duration(
+                                                        milliseconds: 2000),
+                                                    () => setState(() {}),
+                                                  ),
+                                                  autofocus: true,
+                                                  obscureText: false,
+                                                  decoration: InputDecoration(
+                                                    hintText:
+                                                        'Describe here...',
+                                                    hintStyle: FlutterFlowTheme
+                                                            .of(context)
+                                                        .bodyText2
+                                                        .override(
+                                                          fontFamily: 'Outfit',
+                                                          color:
+                                                              Color(0xFF57636C),
+                                                          fontSize: 14,
+                                                          fontWeight:
+                                                              FontWeight.normal,
+                                                        ),
+                                                    enabledBorder:
+                                                        UnderlineInputBorder(
+                                                      borderSide: BorderSide(
+                                                        color:
+                                                            Color(0x00000000),
+                                                        width: 1,
+                                                      ),
+                                                      borderRadius:
+                                                          const BorderRadius
+                                                              .only(
+                                                        topLeft:
+                                                            Radius.circular(
+                                                                4.0),
+                                                        topRight:
+                                                            Radius.circular(
+                                                                4.0),
+                                                      ),
+                                                    ),
+                                                    focusedBorder:
+                                                        UnderlineInputBorder(
+                                                      borderSide: BorderSide(
+                                                        color:
+                                                            Color(0x00000000),
+                                                        width: 1,
+                                                      ),
+                                                      borderRadius:
+                                                          const BorderRadius
+                                                              .only(
+                                                        topLeft:
+                                                            Radius.circular(
+                                                                4.0),
+                                                        topRight:
+                                                            Radius.circular(
+                                                                4.0),
+                                                      ),
+                                                    ),
+                                                    contentPadding:
+                                                        EdgeInsetsDirectional
+                                                            .fromSTEB(
+                                                                16, 0, 8, 12),
+                                                  ),
                                                   style: FlutterFlowTheme.of(
                                                           context)
-                                                      .bodyText1,
+                                                      .bodyText1
+                                                      .override(
+                                                        fontFamily: 'Outfit',
+                                                        color:
+                                                            Color(0xFF101213),
+                                                        fontSize: 14,
+                                                        fontWeight:
+                                                            FontWeight.normal,
+                                                      ),
+                                                  maxLines: 3,
                                                 ),
                                               ),
-                                              FlutterFlowIconButton(
-                                                borderColor: Colors.transparent,
-                                                borderRadius: 30,
-                                                borderWidth: 1,
-                                                buttonSize: 60,
-                                                icon: Icon(
-                                                  Icons.file_upload,
-                                                  color: FlutterFlowTheme.of(
-                                                          context)
-                                                      .primaryText,
-                                                  size: 30,
-                                                ),
-                                                onPressed: () {
-                                                  print(
-                                                      'IconButton pressed ...');
-                                                },
-                                              ),
-                                            ],
-                                          ),
-                                      ],
-                                    ).animated([
-                                      animationsMap[
-                                          'stackOnActionTriggerAnimation']!
-                                    ]),
-                                  ),
-                                  Padding(
-                                    padding: EdgeInsetsDirectional.fromSTEB(
-                                        0, 0, 0, 10),
-                                    child: FFButtonWidget(
-                                      onPressed: () async {
-                                        generatedDate =
-                                            await actions.getCurrentTimestamp();
-
-                                        final postsCreateData =
-                                            createPostsRecordData(
-                                          title: newTitleController!.text,
-                                          description:
-                                              newDescriptionController!.text,
-                                          date: generatedDate,
-                                          image: uploadedFileUrl1,
-                                        );
-                                        await PostsRecord.collection
-                                            .doc()
-                                            .set(postsCreateData);
-                                        await showDialog(
-                                          context: context,
-                                          builder: (alertDialogContext) {
-                                            return AlertDialog(
-                                              title: Text('Success'),
-                                              content: Text(
-                                                  'Post Updated Successfully'),
-                                              actions: [
-                                                TextButton(
-                                                  onPressed: () =>
-                                                      Navigator.pop(
-                                                          alertDialogContext),
-                                                  child: Text('Ok'),
-                                                ),
-                                              ],
-                                            );
-                                          },
-                                        );
-                                        await Navigator.push(
-                                          context,
-                                          PageTransition(
-                                            type: PageTransitionType.scale,
-                                            alignment: Alignment.bottomCenter,
-                                            duration:
-                                                Duration(milliseconds: 300),
-                                            reverseDuration:
-                                                Duration(milliseconds: 300),
-                                            child: LoggedInWidget(),
-                                          ),
-                                        );
-
-                                        setState(() {});
-                                      },
-                                      text: 'Add',
-                                      options: FFButtonOptions(
-                                        width: 130,
-                                        height: 40,
-                                        color: FlutterFlowTheme.of(context)
-                                            .primaryColor,
-                                        textStyle: FlutterFlowTheme.of(context)
-                                            .subtitle2
-                                            .override(
-                                              fontFamily:
-                                                  FlutterFlowTheme.of(context)
-                                                      .subtitle2Family,
-                                              color: Colors.white,
                                             ),
-                                        borderSide: BorderSide(
-                                          color: Colors.transparent,
-                                          width: 1,
+                                          ],
                                         ),
-                                        borderRadius: BorderRadius.circular(8),
                                       ),
-                                    ).animated([
-                                      animationsMap[
-                                          'buttonOnActionTriggerAnimation1']!
-                                    ]),
+                                      Divider(
+                                        height: 12,
+                                        thickness: 2,
+                                        color: Color(0xFFF1F4F8),
+                                      ),
+                                      Padding(
+                                        padding: EdgeInsetsDirectional.fromSTEB(
+                                            12, 4, 12, 12),
+                                        child: Row(
+                                          mainAxisSize: MainAxisSize.max,
+                                          mainAxisAlignment:
+                                              MainAxisAlignment.spaceBetween,
+                                          children: [
+                                            Row(
+                                              mainAxisSize: MainAxisSize.max,
+                                              children: [
+                                                if (!functions.hasUploadedMedia(
+                                                    uploadedFileUrl1))
+                                                  Padding(
+                                                    padding:
+                                                        EdgeInsetsDirectional
+                                                            .fromSTEB(
+                                                                0, 0, 4, 0),
+                                                    child:
+                                                        FlutterFlowIconButton(
+                                                      borderColor:
+                                                          Colors.transparent,
+                                                      borderRadius: 30,
+                                                      borderWidth: 1,
+                                                      buttonSize: 40,
+                                                      icon: Icon(
+                                                        Icons.photo_outlined,
+                                                        color:
+                                                            Color(0xFF57636C),
+                                                        size: 20,
+                                                      ),
+                                                      onPressed: () async {
+                                                        final selectedMedia =
+                                                            await selectMediaWithSourceBottomSheet(
+                                                          context: context,
+                                                          allowPhoto: true,
+                                                        );
+                                                        if (selectedMedia !=
+                                                                null &&
+                                                            selectedMedia.every((m) =>
+                                                                validateFileFormat(
+                                                                    m.storagePath,
+                                                                    context))) {
+                                                          showUploadMessage(
+                                                            context,
+                                                            'Uploading file...',
+                                                            showLoading: true,
+                                                          );
+                                                          final downloadUrls =
+                                                              (await Future.wait(selectedMedia
+                                                                      .map((m) async => await uploadData(
+                                                                          m
+                                                                              .storagePath,
+                                                                          m
+                                                                              .bytes))))
+                                                                  .where((u) =>
+                                                                      u != null)
+                                                                  .map(
+                                                                      (u) => u!)
+                                                                  .toList();
+                                                          ScaffoldMessenger.of(
+                                                                  context)
+                                                              .hideCurrentSnackBar();
+                                                          if (downloadUrls
+                                                                  .length ==
+                                                              selectedMedia
+                                                                  .length) {
+                                                            setState(() =>
+                                                                uploadedFileUrl1 =
+                                                                    downloadUrls
+                                                                        .first);
+                                                            showUploadMessage(
+                                                              context,
+                                                              'Success!',
+                                                            );
+                                                          } else {
+                                                            showUploadMessage(
+                                                              context,
+                                                              'Failed to upload media',
+                                                            );
+                                                            return;
+                                                          }
+                                                        }
+                                                      },
+                                                    ),
+                                                  ),
+                                                if (functions.hasUploadedMedia(
+                                                    uploadedFileUrl1))
+                                                  Image.network(
+                                                    uploadedFileUrl1,
+                                                    width: 100,
+                                                    height: 100,
+                                                    fit: BoxFit.cover,
+                                                  ),
+                                              ],
+                                            ),
+                                            FFButtonWidget(
+                                              onPressed: () async {
+                                                final postsCreateData =
+                                                    createPostsRecordData(
+                                                  title: titleController!.text,
+                                                  description:
+                                                      descriptionController!
+                                                          .text,
+                                                  date: getCurrentTimestamp,
+                                                  image: uploadedFileUrl1,
+                                                );
+                                                var postsRecordReference =
+                                                    PostsRecord.collection
+                                                        .doc();
+                                                await postsRecordReference
+                                                    .set(postsCreateData);
+                                                posted = PostsRecord
+                                                    .getDocumentFromData(
+                                                        postsCreateData,
+                                                        postsRecordReference);
+                                                await Navigator.push(
+                                                  context,
+                                                  PageTransition(
+                                                    type: PageTransitionType
+                                                        .scale,
+                                                    alignment:
+                                                        Alignment.bottomCenter,
+                                                    duration: Duration(
+                                                        milliseconds: 300),
+                                                    reverseDuration: Duration(
+                                                        milliseconds: 300),
+                                                    child: LoggedInWidget(),
+                                                  ),
+                                                );
+
+                                                setState(() {});
+                                              },
+                                              text: 'Post',
+                                              options: FFButtonOptions(
+                                                width: 90,
+                                                height: 40,
+                                                color: Color(0xFF4B39EF),
+                                                textStyle:
+                                                    FlutterFlowTheme.of(context)
+                                                        .subtitle2
+                                                        .override(
+                                                          fontFamily: 'Outfit',
+                                                          color: Colors.white,
+                                                          fontSize: 16,
+                                                          fontWeight:
+                                                              FontWeight.w500,
+                                                        ),
+                                                borderSide: BorderSide(
+                                                  color: Colors.transparent,
+                                                  width: 1,
+                                                ),
+                                              ),
+                                            ),
+                                          ],
+                                        ),
+                                      ),
+                                    ],
                                   ),
-                                ],
+                                ),
                               ),
                             ),
                             Padding(
@@ -990,7 +1003,7 @@ class _LoggedInWidgetState extends State<LoggedInWidget>
                                           ),
                                         ).animated([
                                           animationsMap[
-                                              'buttonOnActionTriggerAnimation2']!
+                                              'buttonOnActionTriggerAnimation']!
                                         ]),
                                       ],
                                     ),
