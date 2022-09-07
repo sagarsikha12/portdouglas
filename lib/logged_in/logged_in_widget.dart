@@ -811,7 +811,7 @@ class _LoggedInWidgetState extends State<LoggedInWidget>
                                       mainAxisSize: MainAxisSize.max,
                                       children: [
                                         GradientText(
-                                          'Add Two Images turn by turn  display on What\'s On Page',
+                                          'Add Two Images turn by turn  to display on What\'s On Page',
                                           textAlign: TextAlign.center,
                                           style: FlutterFlowTheme.of(context)
                                               .bodyText1
