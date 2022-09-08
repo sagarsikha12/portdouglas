@@ -587,10 +587,10 @@ class _MembershipFormWidgetState extends State<MembershipFormWidget>
                               .doc()
                               .set(volunteerCreateData);
                           sent = await SendEmailCall.call(
-                            toEmail: 'basnetsagar977@gmail.com',
+                            toEmail: 'cdwpt@pdnc.org.au',
                             subject: 'New Volunteer Request',
                             content:
-                                'Greetings Team, There is new volunteer request in the app, Please check it.   Name:${memberNameController!.text}    Email:${memberEmailController!.text}        Phone:${memberPhoneController!.text}',
+                                'Greetings Team, Request received through the app. Please respond to the enquiry.   Name:${memberNameController!.text}    Email:${memberEmailController!.text}        Phone:${memberPhoneController!.text}',
                           );
                           if ((sent?.succeeded ?? true)) {
                             await showDialog(
@@ -642,7 +642,7 @@ class _MembershipFormWidgetState extends State<MembershipFormWidget>
                         options: FFButtonOptions(
                           width: double.infinity,
                           height: 40,
-                          color: Colors.black,
+                          color: Color(0xFF0D0967),
                           textStyle:
                               FlutterFlowTheme.of(context).subtitle2.override(
                                     fontFamily: FlutterFlowTheme.of(context)

@@ -549,10 +549,10 @@ class _BecomeaMemberWidgetState extends State<BecomeaMemberWidget> {
                               .doc()
                               .set(membersCreateData);
                           sent = await SendEmailCall.call(
-                            toEmail: 'basnetsagar977@gmail.com',
+                            toEmail: 'committee@pdnc.org.au',
                             subject: 'New Member Request',
                             content:
-                                'Hi there, new member request has been received in the application.       Applicant Name is   ${memberNameController!.text},     Email is${memberEmailController!.text} and contact number is  ${memberPhoneController!.text}',
+                                'Greetings Team, Member Request received through the app. Please respond to the enquiry.  Applicant Name is   ${memberNameController!.text},     Email is${memberEmailController!.text} and contact number is  ${memberPhoneController!.text}',
                           );
                           if ((sent?.succeeded ?? true)) {
                             await showDialog(
