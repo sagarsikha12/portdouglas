@@ -244,43 +244,78 @@ class _LoggedInWidgetState extends State<LoggedInWidget>
                     borderRadius: BorderRadius.circular(8),
                   ),
                 ),
-                if (!currentUserEmailVerified)
-                  AuthUserStreamWidget(
-                    child: FFButtonWidget(
-                      onPressed: () async {
-                        await Navigator.push(
-                          context,
-                          PageTransition(
-                            type: PageTransitionType.scale,
-                            alignment: Alignment.bottomCenter,
-                            duration: Duration(milliseconds: 300),
-                            reverseDuration: Duration(milliseconds: 300),
-                            child: AdminLoginWidget(),
-                          ),
-                        );
-                      },
-                      text: 'Admin Login',
-                      icon: Icon(
-                        Icons.perm_contact_cal_rounded,
-                        size: 15,
-                      ),
-                      options: FFButtonOptions(
-                        width: 130,
-                        height: 40,
-                        color: FlutterFlowTheme.of(context).primaryColor,
-                        textStyle: FlutterFlowTheme.of(context)
-                            .subtitle2
-                            .override(
-                              fontFamily:
-                                  FlutterFlowTheme.of(context).subtitle2Family,
-                              color: FlutterFlowTheme.of(context).secondaryText,
-                            ),
-                        borderSide: BorderSide(
-                          color: Colors.transparent,
-                          width: 1,
+                if (!loggedIn)
+                  FFButtonWidget(
+                    onPressed: () async {
+                      await Navigator.push(
+                        context,
+                        PageTransition(
+                          type: PageTransitionType.scale,
+                          alignment: Alignment.bottomCenter,
+                          duration: Duration(milliseconds: 300),
+                          reverseDuration: Duration(milliseconds: 300),
+                          child: LoggedInWidget(),
                         ),
-                        borderRadius: BorderRadius.circular(8),
+                      );
+                    },
+                    text: 'Admin Page',
+                    icon: Icon(
+                      Icons.admin_panel_settings_outlined,
+                      size: 15,
+                    ),
+                    options: FFButtonOptions(
+                      width: 130,
+                      height: 40,
+                      color: FlutterFlowTheme.of(context).primaryColor,
+                      textStyle: FlutterFlowTheme.of(context)
+                          .subtitle2
+                          .override(
+                            fontFamily:
+                                FlutterFlowTheme.of(context).subtitle2Family,
+                            color: FlutterFlowTheme.of(context).secondaryText,
+                          ),
+                      borderSide: BorderSide(
+                        color: Colors.transparent,
+                        width: 1,
                       ),
+                      borderRadius: BorderRadius.circular(8),
+                    ),
+                  ),
+                if (!loggedIn)
+                  FFButtonWidget(
+                    onPressed: () async {
+                      await Navigator.push(
+                        context,
+                        PageTransition(
+                          type: PageTransitionType.scale,
+                          alignment: Alignment.bottomCenter,
+                          duration: Duration(milliseconds: 300),
+                          reverseDuration: Duration(milliseconds: 300),
+                          child: AdminLoginWidget(),
+                        ),
+                      );
+                    },
+                    text: 'Admin Login',
+                    icon: Icon(
+                      Icons.login,
+                      size: 15,
+                    ),
+                    options: FFButtonOptions(
+                      width: 130,
+                      height: 40,
+                      color: FlutterFlowTheme.of(context).primaryColor,
+                      textStyle: FlutterFlowTheme.of(context)
+                          .subtitle2
+                          .override(
+                            fontFamily:
+                                FlutterFlowTheme.of(context).subtitle2Family,
+                            color: FlutterFlowTheme.of(context).secondaryText,
+                          ),
+                      borderSide: BorderSide(
+                        color: Colors.transparent,
+                        width: 1,
+                      ),
+                      borderRadius: BorderRadius.circular(8),
                     ),
                   ),
                 FFButtonWidget(
@@ -385,6 +420,45 @@ class _LoggedInWidgetState extends State<LoggedInWidget>
                     borderRadius: BorderRadius.circular(8),
                   ),
                 ),
+                if (loggedIn)
+                  FFButtonWidget(
+                    onPressed: () async {
+                      await signOut();
+                      await Navigator.pushAndRemoveUntil(
+                        context,
+                        PageTransition(
+                          type: PageTransitionType.scale,
+                          alignment: Alignment.bottomCenter,
+                          duration: Duration(milliseconds: 300),
+                          reverseDuration: Duration(milliseconds: 300),
+                          child: HomePageWidget(),
+                        ),
+                        (r) => false,
+                      );
+                    },
+                    text: 'Logout',
+                    icon: Icon(
+                      Icons.logout,
+                      size: 15,
+                    ),
+                    options: FFButtonOptions(
+                      width: 130,
+                      height: 40,
+                      color: Color(0xB1CB2727),
+                      textStyle: FlutterFlowTheme.of(context)
+                          .subtitle2
+                          .override(
+                            fontFamily:
+                                FlutterFlowTheme.of(context).subtitle2Family,
+                            color: FlutterFlowTheme.of(context).secondaryText,
+                          ),
+                      borderSide: BorderSide(
+                        color: Colors.transparent,
+                        width: 1,
+                      ),
+                      borderRadius: BorderRadius.circular(8),
+                    ),
+                  ),
               ],
             ),
           ),
