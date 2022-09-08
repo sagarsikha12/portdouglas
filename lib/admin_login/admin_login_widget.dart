@@ -1,11 +1,13 @@
 import '../auth/auth_util.dart';
 import '../becomea_member/becomea_member_widget.dart';
+import '../contactus/contactus_widget.dart';
 import '../flutter_flow/flutter_flow_theme.dart';
 import '../flutter_flow/flutter_flow_util.dart';
 import '../flutter_flow/flutter_flow_widgets.dart';
 import '../home_page/home_page_widget.dart';
 import '../logged_in/logged_in_widget.dart';
 import '../membership_form/membership_form_widget.dart';
+import '../policy/policy_widget.dart';
 import '../whatsnew/whatsnew_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -36,15 +38,15 @@ class _AdminLoginWidgetState extends State<AdminLoginWidget> {
     return Scaffold(
       key: scaffoldKey,
       appBar: AppBar(
-        backgroundColor: Color(0xFFF2E41D),
+        backgroundColor: Color(0xFFE7AF20),
         automaticallyImplyLeading: true,
         title: Text(
-          'Port Doglous Community Service Network',
+          'Port Douglas Community Service Network Inc.',
           textAlign: TextAlign.center,
           style: FlutterFlowTheme.of(context).title1.override(
                 fontFamily: FlutterFlowTheme.of(context).title1Family,
-                fontSize: 13,
-                fontWeight: FontWeight.w800,
+                fontSize: 12,
+                fontWeight: FontWeight.w600,
               ),
         ),
         actions: [],
@@ -53,12 +55,12 @@ class _AdminLoginWidgetState extends State<AdminLoginWidget> {
       ),
       backgroundColor: Color(0xFFF6E04E),
       drawer: Drawer(
-        elevation: 16,
+        elevation: 10,
         child: Container(
           width: 100,
           height: 100,
           decoration: BoxDecoration(
-            color: Color(0xFFF0E414),
+            color: Color(0xFFE7AF20),
             shape: BoxShape.rectangle,
           ),
           child: SingleChildScrollView(
@@ -71,7 +73,7 @@ class _AdminLoginWidgetState extends State<AdminLoginWidget> {
                   width: 100,
                   height: 100,
                   decoration: BoxDecoration(
-                    color: Color(0xFFF0E414),
+                    color: Color(0xFFE7AF20),
                     border: Border.all(
                       color: Color(0xFFE7932B),
                     ),
@@ -98,6 +100,7 @@ class _AdminLoginWidgetState extends State<AdminLoginWidget> {
                   text: 'Home',
                   icon: Icon(
                     Icons.home,
+                    color: FlutterFlowTheme.of(context).secondaryText,
                     size: 15,
                   ),
                   options: FFButtonOptions(
@@ -107,7 +110,7 @@ class _AdminLoginWidgetState extends State<AdminLoginWidget> {
                     textStyle: FlutterFlowTheme.of(context).subtitle2.override(
                           fontFamily:
                               FlutterFlowTheme.of(context).subtitle2Family,
-                          color: Colors.white,
+                          color: FlutterFlowTheme.of(context).secondaryText,
                         ),
                     borderSide: BorderSide(
                       color: Colors.transparent,
@@ -130,39 +133,6 @@ class _AdminLoginWidgetState extends State<AdminLoginWidget> {
                   },
                   text: 'Become a Volunteer',
                   icon: Icon(
-                    Icons.volunteer_activism,
-                    size: 15,
-                  ),
-                  options: FFButtonOptions(
-                    width: 130,
-                    height: 40,
-                    color: FlutterFlowTheme.of(context).primaryColor,
-                    textStyle: FlutterFlowTheme.of(context).subtitle2.override(
-                          fontFamily:
-                              FlutterFlowTheme.of(context).subtitle2Family,
-                          color: Colors.white,
-                        ),
-                    borderSide: BorderSide(
-                      color: Colors.transparent,
-                      width: 1,
-                    ),
-                    borderRadius: BorderRadius.circular(8),
-                  ),
-                ),
-                FFButtonWidget(
-                  onPressed: () async {
-                    await Navigator.push(
-                      context,
-                      PageTransition(
-                        type: PageTransitionType.leftToRight,
-                        duration: Duration(milliseconds: 300),
-                        reverseDuration: Duration(milliseconds: 300),
-                        child: BecomeaMemberWidget(),
-                      ),
-                    );
-                  },
-                  text: 'Become a Member',
-                  icon: Icon(
                     Icons.card_membership,
                     size: 15,
                   ),
@@ -173,7 +143,7 @@ class _AdminLoginWidgetState extends State<AdminLoginWidget> {
                     textStyle: FlutterFlowTheme.of(context).subtitle2.override(
                           fontFamily:
                               FlutterFlowTheme.of(context).subtitle2Family,
-                          color: Colors.white,
+                          color: FlutterFlowTheme.of(context).secondaryText,
                         ),
                     borderSide: BorderSide(
                       color: Colors.transparent,
@@ -187,14 +157,88 @@ class _AdminLoginWidgetState extends State<AdminLoginWidget> {
                     await Navigator.push(
                       context,
                       PageTransition(
-                        type: PageTransitionType.leftToRight,
+                        type: PageTransitionType.scale,
+                        alignment: Alignment.bottomCenter,
+                        duration: Duration(milliseconds: 300),
+                        reverseDuration: Duration(milliseconds: 300),
+                        child: BecomeaMemberWidget(),
+                      ),
+                    );
+                  },
+                  text: 'Become a Member',
+                  icon: Icon(
+                    Icons.perm_contact_cal_rounded,
+                    size: 15,
+                  ),
+                  options: FFButtonOptions(
+                    width: 130,
+                    height: 40,
+                    color: FlutterFlowTheme.of(context).primaryColor,
+                    textStyle: FlutterFlowTheme.of(context).subtitle2.override(
+                          fontFamily:
+                              FlutterFlowTheme.of(context).subtitle2Family,
+                          color: FlutterFlowTheme.of(context).secondaryText,
+                        ),
+                    borderSide: BorderSide(
+                      color: Colors.transparent,
+                      width: 1,
+                    ),
+                    borderRadius: BorderRadius.circular(8),
+                  ),
+                ),
+                if (!currentUserEmailVerified)
+                  AuthUserStreamWidget(
+                    child: FFButtonWidget(
+                      onPressed: () async {
+                        await Navigator.push(
+                          context,
+                          PageTransition(
+                            type: PageTransitionType.scale,
+                            alignment: Alignment.bottomCenter,
+                            duration: Duration(milliseconds: 300),
+                            reverseDuration: Duration(milliseconds: 300),
+                            child: AdminLoginWidget(),
+                          ),
+                        );
+                      },
+                      text: 'Admin Login',
+                      icon: Icon(
+                        Icons.perm_contact_cal_rounded,
+                        size: 15,
+                      ),
+                      options: FFButtonOptions(
+                        width: 130,
+                        height: 40,
+                        color: FlutterFlowTheme.of(context).primaryColor,
+                        textStyle: FlutterFlowTheme.of(context)
+                            .subtitle2
+                            .override(
+                              fontFamily:
+                                  FlutterFlowTheme.of(context).subtitle2Family,
+                              color: FlutterFlowTheme.of(context).secondaryText,
+                            ),
+                        borderSide: BorderSide(
+                          color: Colors.transparent,
+                          width: 1,
+                        ),
+                        borderRadius: BorderRadius.circular(8),
+                      ),
+                    ),
+                  ),
+                FFButtonWidget(
+                  onPressed: () async {
+                    await Navigator.push(
+                      context,
+                      PageTransition(
+                        type: PageTransitionType.scale,
+                        alignment: Alignment.bottomCenter,
                         duration: Duration(milliseconds: 300),
                         reverseDuration: Duration(milliseconds: 300),
                         child: WhatsnewWidget(),
                       ),
                     );
                   },
-                  text: 'What\'s on?',
+                  text: 'What\'s On ?',
                   icon: Icon(
                     Icons.fiber_new_outlined,
                     size: 15,
@@ -206,7 +250,75 @@ class _AdminLoginWidgetState extends State<AdminLoginWidget> {
                     textStyle: FlutterFlowTheme.of(context).subtitle2.override(
                           fontFamily:
                               FlutterFlowTheme.of(context).subtitle2Family,
-                          color: Colors.white,
+                          color: FlutterFlowTheme.of(context).secondaryText,
+                        ),
+                    borderSide: BorderSide(
+                      color: Colors.transparent,
+                      width: 1,
+                    ),
+                    borderRadius: BorderRadius.circular(8),
+                  ),
+                ),
+                FFButtonWidget(
+                  onPressed: () async {
+                    await Navigator.push(
+                      context,
+                      PageTransition(
+                        type: PageTransitionType.scale,
+                        alignment: Alignment.bottomCenter,
+                        duration: Duration(milliseconds: 300),
+                        reverseDuration: Duration(milliseconds: 300),
+                        child: ContactusWidget(),
+                      ),
+                    );
+                  },
+                  text: 'Contact Us',
+                  icon: Icon(
+                    Icons.contact_support_sharp,
+                    size: 15,
+                  ),
+                  options: FFButtonOptions(
+                    width: 130,
+                    height: 40,
+                    color: FlutterFlowTheme.of(context).primaryColor,
+                    textStyle: FlutterFlowTheme.of(context).subtitle2.override(
+                          fontFamily:
+                              FlutterFlowTheme.of(context).subtitle2Family,
+                          color: FlutterFlowTheme.of(context).secondaryText,
+                        ),
+                    borderSide: BorderSide(
+                      color: Colors.transparent,
+                      width: 1,
+                    ),
+                    borderRadius: BorderRadius.circular(8),
+                  ),
+                ),
+                FFButtonWidget(
+                  onPressed: () async {
+                    await Navigator.push(
+                      context,
+                      PageTransition(
+                        type: PageTransitionType.scale,
+                        alignment: Alignment.bottomCenter,
+                        duration: Duration(milliseconds: 300),
+                        reverseDuration: Duration(milliseconds: 300),
+                        child: PolicyWidget(),
+                      ),
+                    );
+                  },
+                  text: 'Privacy Policy',
+                  icon: Icon(
+                    Icons.policy,
+                    size: 15,
+                  ),
+                  options: FFButtonOptions(
+                    width: 130,
+                    height: 40,
+                    color: FlutterFlowTheme.of(context).primaryColor,
+                    textStyle: FlutterFlowTheme.of(context).subtitle2.override(
+                          fontFamily:
+                              FlutterFlowTheme.of(context).subtitle2Family,
+                          color: FlutterFlowTheme.of(context).secondaryText,
                         ),
                     borderSide: BorderSide(
                       color: Colors.transparent,
@@ -342,7 +454,7 @@ class _AdminLoginWidgetState extends State<AdminLoginWidget> {
                   options: FFButtonOptions(
                     width: double.infinity,
                     height: 40,
-                    color: Colors.black,
+                    color: Color(0xFF0D0967),
                     textStyle: FlutterFlowTheme.of(context).subtitle2.override(
                           fontFamily:
                               FlutterFlowTheme.of(context).subtitle2Family,

@@ -1,12 +1,16 @@
 import '../admin_login/admin_login_widget.dart';
+import '../auth/auth_util.dart';
 import '../backend/backend.dart';
 import '../becomea_member/becomea_member_widget.dart';
+import '../contactus/contactus_widget.dart';
 import '../flutter_flow/flutter_flow_animations.dart';
 import '../flutter_flow/flutter_flow_theme.dart';
 import '../flutter_flow/flutter_flow_util.dart';
 import '../flutter_flow/flutter_flow_widgets.dart';
 import '../membership_form/membership_form_widget.dart';
+import '../policy/policy_widget.dart';
 import '../whatsnew/whatsnew_widget.dart';
+import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:infinite_scroll_pagination/infinite_scroll_pagination.dart';
@@ -66,14 +70,14 @@ class _HomePageWidgetState extends State<HomePageWidget>
     return Scaffold(
       key: scaffoldKey,
       appBar: AppBar(
-        backgroundColor: Color(0xFFF2E41D),
+        backgroundColor: Color(0xFFE7AF20),
         automaticallyImplyLeading: true,
-        title: Text(
-          'Port Douglas Community Service Network ',
+        title: AutoSizeText(
+          'Port Douglas Community Service Network Inc.',
           textAlign: TextAlign.start,
           style: FlutterFlowTheme.of(context).title1.override(
-                fontFamily: 'Roboto',
-                fontSize: 15,
+                fontFamily: 'Poppins',
+                fontSize: 10,
                 fontWeight: FontWeight.w600,
               ),
         ),
@@ -83,12 +87,12 @@ class _HomePageWidgetState extends State<HomePageWidget>
       ),
       backgroundColor: FlutterFlowTheme.of(context).primaryBackground,
       drawer: Drawer(
-        elevation: 16,
+        elevation: 10,
         child: Container(
           width: 100,
           height: 100,
           decoration: BoxDecoration(
-            color: Color(0xFFF0E414),
+            color: Color(0xFFE7AF20),
             shape: BoxShape.rectangle,
           ),
           child: SingleChildScrollView(
@@ -101,7 +105,7 @@ class _HomePageWidgetState extends State<HomePageWidget>
                   width: 100,
                   height: 100,
                   decoration: BoxDecoration(
-                    color: Color(0xFFF0E414),
+                    color: Color(0xFFE7AF20),
                     border: Border.all(
                       color: Color(0xFFE7932B),
                     ),
@@ -214,6 +218,45 @@ class _HomePageWidgetState extends State<HomePageWidget>
                     borderRadius: BorderRadius.circular(8),
                   ),
                 ),
+                if (!currentUserEmailVerified)
+                  AuthUserStreamWidget(
+                    child: FFButtonWidget(
+                      onPressed: () async {
+                        await Navigator.push(
+                          context,
+                          PageTransition(
+                            type: PageTransitionType.scale,
+                            alignment: Alignment.bottomCenter,
+                            duration: Duration(milliseconds: 300),
+                            reverseDuration: Duration(milliseconds: 300),
+                            child: AdminLoginWidget(),
+                          ),
+                        );
+                      },
+                      text: 'Admin Login',
+                      icon: Icon(
+                        Icons.perm_contact_cal_rounded,
+                        size: 15,
+                      ),
+                      options: FFButtonOptions(
+                        width: 130,
+                        height: 40,
+                        color: FlutterFlowTheme.of(context).primaryColor,
+                        textStyle: FlutterFlowTheme.of(context)
+                            .subtitle2
+                            .override(
+                              fontFamily:
+                                  FlutterFlowTheme.of(context).subtitle2Family,
+                              color: FlutterFlowTheme.of(context).secondaryText,
+                            ),
+                        borderSide: BorderSide(
+                          color: Colors.transparent,
+                          width: 1,
+                        ),
+                        borderRadius: BorderRadius.circular(8),
+                      ),
+                    ),
+                  ),
                 FFButtonWidget(
                   onPressed: () async {
                     await Navigator.push(
@@ -223,13 +266,13 @@ class _HomePageWidgetState extends State<HomePageWidget>
                         alignment: Alignment.bottomCenter,
                         duration: Duration(milliseconds: 300),
                         reverseDuration: Duration(milliseconds: 300),
-                        child: AdminLoginWidget(),
+                        child: WhatsnewWidget(),
                       ),
                     );
                   },
-                  text: 'Admin Login',
+                  text: 'What\'s On ?',
                   icon: Icon(
-                    Icons.perm_contact_cal_rounded,
+                    Icons.fiber_new_outlined,
                     size: 15,
                   ),
                   options: FFButtonOptions(
@@ -257,13 +300,47 @@ class _HomePageWidgetState extends State<HomePageWidget>
                         alignment: Alignment.bottomCenter,
                         duration: Duration(milliseconds: 300),
                         reverseDuration: Duration(milliseconds: 300),
-                        child: WhatsnewWidget(),
+                        child: ContactusWidget(),
                       ),
                     );
                   },
-                  text: 'What\'s On ?',
+                  text: 'Contact Us',
                   icon: Icon(
-                    Icons.fiber_new_outlined,
+                    Icons.contact_support_sharp,
+                    size: 15,
+                  ),
+                  options: FFButtonOptions(
+                    width: 130,
+                    height: 40,
+                    color: FlutterFlowTheme.of(context).primaryColor,
+                    textStyle: FlutterFlowTheme.of(context).subtitle2.override(
+                          fontFamily:
+                              FlutterFlowTheme.of(context).subtitle2Family,
+                          color: FlutterFlowTheme.of(context).secondaryText,
+                        ),
+                    borderSide: BorderSide(
+                      color: Colors.transparent,
+                      width: 1,
+                    ),
+                    borderRadius: BorderRadius.circular(8),
+                  ),
+                ),
+                FFButtonWidget(
+                  onPressed: () async {
+                    await Navigator.push(
+                      context,
+                      PageTransition(
+                        type: PageTransitionType.scale,
+                        alignment: Alignment.bottomCenter,
+                        duration: Duration(milliseconds: 300),
+                        reverseDuration: Duration(milliseconds: 300),
+                        child: PolicyWidget(),
+                      ),
+                    );
+                  },
+                  text: 'Privacy Policy',
+                  icon: Icon(
+                    Icons.policy,
                     size: 15,
                   ),
                   options: FFButtonOptions(
@@ -533,8 +610,7 @@ class _HomePageWidgetState extends State<HomePageWidget>
                                         options: FFButtonOptions(
                                           width: 130,
                                           height: 40,
-                                          color: FlutterFlowTheme.of(context)
-                                              .primaryColor,
+                                          color: Color(0xFF0D0967),
                                           textStyle:
                                               FlutterFlowTheme.of(context)
                                                   .bodyText2,

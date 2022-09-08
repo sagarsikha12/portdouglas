@@ -14,3 +14,15 @@ bool hasUploadedMedia(String? mediaPath) {
   // Add your function code here!
   return mediaPath != null && mediaPath.isNotEmpty;
 }
+
+LatLng getUserLocation(LatLng? userLocation) {
+  return LatLng(-16.484360, 145.463310);
+}
+
+LatLng location() {
+  return LatLng(-16.484360, 145.463310);
+}
+
+LatLng markinglocation() {
+  return LatLng(-16.484360, 145.463310);
+}

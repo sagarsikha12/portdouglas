@@ -6,5 +6,7 @@ export 'logged_in/logged_in_widget.dart' show LoggedInWidget;
 export 'update_post/update_post_widget.dart' show UpdatePostWidget;
 export 'logged_in_members/logged_in_members_widget.dart'
     show LoggedInMembersWidget;
-export 'becomea_member/becomea_member_widget.dart' show BecomeaMemberWidget;
 export 'whatsnew/whatsnew_widget.dart' show WhatsnewWidget;
+export 'becomea_member/becomea_member_widget.dart' show BecomeaMemberWidget;
+export 'contactus/contactus_widget.dart' show ContactusWidget;
+export 'policy/policy_widget.dart' show PolicyWidget;
