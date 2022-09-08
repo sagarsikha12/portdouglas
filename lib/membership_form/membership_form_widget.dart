@@ -238,7 +238,7 @@ class _MembershipFormWidgetState extends State<MembershipFormWidget>
                     borderRadius: BorderRadius.circular(8),
                   ),
                 ),
-                if (!loggedIn)
+                if (loggedIn)
                   FFButtonWidget(
                     onPressed: () async {
                       await Navigator.push(

@@ -178,7 +178,7 @@ class _WhatsnewWidgetState extends State<WhatsnewWidget> {
                     borderRadius: BorderRadius.circular(8),
                   ),
                 ),
-                if (!loggedIn)
+                if (loggedIn)
                   FFButtonWidget(
                     onPressed: () async {
                       await Navigator.push(

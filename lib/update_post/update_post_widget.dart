@@ -239,7 +239,7 @@ class _UpdatePostWidgetState extends State<UpdatePostWidget> {
                     borderRadius: BorderRadius.circular(8),
                   ),
                 ),
-                if (!loggedIn)
+                if (loggedIn)
                   FFButtonWidget(
                     onPressed: () async {
                       await Navigator.push(

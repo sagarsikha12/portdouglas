@@ -199,7 +199,7 @@ class _BecomeaMemberWidgetState extends State<BecomeaMemberWidget> {
                     borderRadius: BorderRadius.circular(8),
                   ),
                 ),
-                if (!loggedIn)
+                if (loggedIn)
                   FFButtonWidget(
                     onPressed: () async {
                       await Navigator.push(

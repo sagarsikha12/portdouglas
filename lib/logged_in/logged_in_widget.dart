@@ -244,7 +244,7 @@ class _LoggedInWidgetState extends State<LoggedInWidget>
                     borderRadius: BorderRadius.circular(8),
                   ),
                 ),
-                if (!loggedIn)
+                if (loggedIn)
                   FFButtonWidget(
                     onPressed: () async {
                       await Navigator.push(
