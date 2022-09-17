@@ -3,7 +3,7 @@ import '../flutter_flow/flutter_flow_theme.dart';
 import '../flutter_flow/flutter_flow_util.dart';
 import '../home_page/home_page_widget.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_html/flutter_html.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 class ContactusWidget extends StatefulWidget {
@@ -70,9 +70,170 @@ class _ContactusWidgetState extends State<ContactusWidget> {
                       color: FlutterFlowTheme.of(context).primaryBackground,
                       borderRadius: BorderRadius.circular(12),
                     ),
-                    child: Html(
-                      data:
-                          '<div class=\"sqs-block html-block sqs-block-html\" data-block-type=\"2\" id=\"block-yui_3_17_2_1_1537192789822_14397\"><div class=\"sqs-block-content\"><h1 style=\"white-space:pre-wrap;\" _msthash=\"1322594\" _msttexthash=\"82368\">LOCATION </h1><p class=\"\" style=\"white-space:pre-wrap;\" _msthash=\"1274208\" _msttexthash=\"856050\">6-10 Mowbray St, Port Douglas, Qld 4877</p>\n<h1 style=\"white-space:pre-wrap;\" _msthash=\"1322596\" _msttexthash=\"134628\">Telephone </h1><p class=\"\" style=\"white-space:pre-wrap;\" _msthash=\"1274211\" _msttexthash=\"7743463\">☎︎ <a href=\"tel:0740995518\">07 40995518</a></p><h1 style=\"white-space:pre-wrap;\" _msthash=\"1322597\" _msttexthash=\"58058\">Email </h1><p class=\"\" style=\"white-space:pre-wrap;\" _msthash=\"1274212\" _msttexthash=\"379847\">manager@pdnc.org.au</p>\n<h1>Website:</h1><p>https://www.portdouglascommunityservicenetwork.org.au</p>\n\n</div></div>',
+                    child: Column(
+                      mainAxisSize: MainAxisSize.max,
+                      children: [
+                        Column(
+                          mainAxisSize: MainAxisSize.max,
+                          children: [
+                            Align(
+                              alignment: AlignmentDirectional(-1, 0),
+                              child: Text(
+                                'Find us:',
+                                textAlign: TextAlign.start,
+                                style: FlutterFlowTheme.of(context).title3,
+                              ),
+                            ),
+                            Align(
+                              alignment: AlignmentDirectional(-1, 0),
+                              child: InkWell(
+                                onTap: () async {
+                                  await launchURL(
+                                      'https://goo.gl/maps/HNq8kwdp6BMTvRgZ8');
+                                },
+                                child: Text(
+                                  '6-10 Mowbray St, Port Douglas, QLD, 4877',
+                                  textAlign: TextAlign.start,
+                                  style: GoogleFonts.getFont(
+                                    'Arya',
+                                    color: Color(0xFF0D0967),
+                                    fontWeight: FontWeight.w300,
+                                    fontSize: 20,
+                                  ),
+                                ),
+                              ),
+                            ),
+                            Align(
+                              alignment: AlignmentDirectional(-1, 0),
+                              child: Text(
+                                'Call us:',
+                                textAlign: TextAlign.start,
+                                style: FlutterFlowTheme.of(context).title3,
+                              ),
+                            ),
+                            Align(
+                              alignment: AlignmentDirectional(-1, 0),
+                              child: InkWell(
+                                onTap: () async {
+                                  await launchURL('tel:(07) 4099 5518');
+                                },
+                                child: Text(
+                                  '07 4099 5518',
+                                  textAlign: TextAlign.start,
+                                  style: GoogleFonts.getFont(
+                                    'Arya',
+                                    color: Color(0xFF0D0967),
+                                    fontWeight: FontWeight.w300,
+                                    fontSize: 20,
+                                  ),
+                                ),
+                              ),
+                            ),
+                            Align(
+                              alignment: AlignmentDirectional(-1, 0),
+                              child: Text(
+                                'Email us:',
+                                textAlign: TextAlign.start,
+                                style: FlutterFlowTheme.of(context).title3,
+                              ),
+                            ),
+                            Align(
+                              alignment: AlignmentDirectional(-1, 0),
+                              child: InkWell(
+                                onTap: () async {
+                                  await launchURL(
+                                      'https://mail.google.com/mail/?view=cm&fs=1&to=Manager@pdnc.org.au&su=SUBJECT&body=BODY');
+                                },
+                                child: Text(
+                                  'Manager@pdnc.org.au',
+                                  textAlign: TextAlign.start,
+                                  style: GoogleFonts.getFont(
+                                    'Arya',
+                                    color: Color(0xFF0D0967),
+                                    fontWeight: FontWeight.w300,
+                                    fontSize: 20,
+                                  ),
+                                ),
+                              ),
+                            ),
+                            Column(
+                              mainAxisSize: MainAxisSize.max,
+                              children: [
+                                Align(
+                                  alignment: AlignmentDirectional(-1, 0),
+                                  child: Text(
+                                    'Follow  us:',
+                                    style: FlutterFlowTheme.of(context).title3,
+                                  ),
+                                ),
+                              ],
+                            ),
+                          ],
+                        ),
+                        Padding(
+                          padding: EdgeInsetsDirectional.fromSTEB(8, 8, 8, 8),
+                          child: Row(
+                            mainAxisSize: MainAxisSize.max,
+                            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                            children: [
+                              InkWell(
+                                onTap: () async {
+                                  await launchURL(
+                                      'https://www.facebook.com/PortDouglasCommunityServiceNetwork');
+                                },
+                                child: Container(
+                                  width: 50,
+                                  height: 50,
+                                  decoration: BoxDecoration(
+                                    color: Color(0xFF0D0967),
+                                    boxShadow: [
+                                      BoxShadow(
+                                        blurRadius: 5,
+                                        color: Color(0xFF0D0967),
+                                        offset: Offset(0, 2),
+                                      )
+                                    ],
+                                    shape: BoxShape.circle,
+                                  ),
+                                  alignment: AlignmentDirectional(0, 0),
+                                  child: FaIcon(
+                                    FontAwesomeIcons.facebookF,
+                                    color: Colors.white,
+                                    size: 24,
+                                  ),
+                                ),
+                              ),
+                              InkWell(
+                                onTap: () async {
+                                  await launchURL(
+                                      'https://www.instagram.com/portdouglasneighbourhoodcentre/');
+                                },
+                                child: Container(
+                                  width: 50,
+                                  height: 50,
+                                  decoration: BoxDecoration(
+                                    color: Color(0xFFE4405F),
+                                    boxShadow: [
+                                      BoxShadow(
+                                        blurRadius: 5,
+                                        color: Color(0x3314181B),
+                                        offset: Offset(0, 2),
+                                      )
+                                    ],
+                                    shape: BoxShape.circle,
+                                  ),
+                                  alignment: AlignmentDirectional(0, 0),
+                                  child: FaIcon(
+                                    FontAwesomeIcons.instagram,
+                                    color: Colors.white,
+                                    size: 24,
+                                  ),
+                                ),
+                              ),
+                            ],
+                          ),
+                        ),
+                      ],
                     ),
                   ),
                 ],

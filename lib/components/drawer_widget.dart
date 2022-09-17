@@ -59,6 +59,8 @@ class _DrawerWidgetState extends State<DrawerWidget> {
                 textStyle: FlutterFlowTheme.of(context).subtitle2.override(
                       fontFamily: FlutterFlowTheme.of(context).subtitle2Family,
                       color: Colors.white,
+                      useGoogleFonts: GoogleFonts.asMap().containsKey(
+                          FlutterFlowTheme.of(context).subtitle2Family),
                     ),
                 borderSide: BorderSide(
                   color: Colors.transparent,
@@ -83,6 +85,8 @@ class _DrawerWidgetState extends State<DrawerWidget> {
                 textStyle: FlutterFlowTheme.of(context).subtitle2.override(
                       fontFamily: FlutterFlowTheme.of(context).subtitle2Family,
                       color: Colors.white,
+                      useGoogleFonts: GoogleFonts.asMap().containsKey(
+                          FlutterFlowTheme.of(context).subtitle2Family),
                     ),
                 borderSide: BorderSide(
                   color: Colors.transparent,
@@ -107,6 +111,8 @@ class _DrawerWidgetState extends State<DrawerWidget> {
                 textStyle: FlutterFlowTheme.of(context).subtitle2.override(
                       fontFamily: FlutterFlowTheme.of(context).subtitle2Family,
                       color: Colors.white,
+                      useGoogleFonts: GoogleFonts.asMap().containsKey(
+                          FlutterFlowTheme.of(context).subtitle2Family),
                     ),
                 borderSide: BorderSide(
                   color: Colors.transparent,
@@ -131,6 +137,8 @@ class _DrawerWidgetState extends State<DrawerWidget> {
                 textStyle: FlutterFlowTheme.of(context).subtitle2.override(
                       fontFamily: FlutterFlowTheme.of(context).subtitle2Family,
                       color: Colors.white,
+                      useGoogleFonts: GoogleFonts.asMap().containsKey(
+                          FlutterFlowTheme.of(context).subtitle2Family),
                     ),
                 borderSide: BorderSide(
                   color: Colors.transparent,
